@@ -31,6 +31,20 @@
               <td>
                 <p><%= book.body %></p>
               </td>
+              <td>
+                <% if book.favorited_by?(current_user) %>
+                  <%= link_to book_favorites_path(book), method: :delete do %>
+                    <svg class="svg-inline--fa fas fa-sharp fa-solid fa-heart fa-xs" style="color:red"></svg><%= book.favorites.count %>
+                  <% end %>
+                <% else %>
+                  <%= link_to book_favorites_path(book), method: :post do %>
+                    <svg class="svg-inline--fa fas fa-sharp fa-solid fa-heart fa-xs" style="color:blue"></svg><%= book.favorites.count %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                 <p>コメント件数：<%= book.book_comments.count %></p>
+              </td>
             </tr>
           <% end %>
         </tbody>
